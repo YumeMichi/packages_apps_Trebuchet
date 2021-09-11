@@ -52,7 +52,6 @@ import com.android.launcher3.config.FeatureFlags;
 import com.android.launcher3.lineage.LineageUtils;
 import com.android.launcher3.lineage.icon.IconPackStore;
 import com.android.launcher3.lineage.icon.IconPackSettingsActivity;
-import com.android.launcher3.lineage.trust.TrustAppsActivity;
 import com.android.launcher3.uioverrides.plugins.PluginManagerWrapper;
 import com.android.launcher3.util.SecureSettingsObserver;
 
@@ -75,7 +74,6 @@ public class SettingsActivity extends FragmentActivity
     private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 600;
     public static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
 
-    public static final String KEY_TRUST_APPS = "pref_trust_apps";
     public static final String KEY_ICON_PACK = "pref_icon_pack";
 
     private static final String KEY_MINUS_ONE = "pref_enable_minus_one";
@@ -250,16 +248,6 @@ public class SettingsActivity extends FragmentActivity
                 case KEY_MINUS_ONE:
                     return LineageUtils.isPackageEnabled(getActivity(), SEARCH_PACKAGE);
 
-                case KEY_TRUST_APPS:
-                    preference.setOnPreferenceClickListener(p -> {
-                        LineageUtils.showLockScreen(getActivity(),
-                                getString(R.string.trust_apps_manager_name), () -> {
-                            Intent intent = new Intent(getActivity(), TrustAppsActivity.class);
-                            startActivity(intent);
-                        });
-                        return true;
-                    });
-                    return true;
                 case KEY_ICON_PACK:
                     setupIconPackPreference(preference);
                     return true;
